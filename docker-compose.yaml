@@ -1,0 +1,6 @@
+version: '3.5'
+services:
+  book-backend:
+    build: ./backend
+    ports:
+      - 8080:8080
