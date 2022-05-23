@@ -13,7 +13,7 @@ func main() {
 	v1.GET("/", handler.RootHandler)
 	v1.GET("/books/:id/:title", handler.GetBooksHandler)
 	v1.GET("/query", handler.QueryHandler)
-	v1.POST("/books", hanler.PostBooksHandler)
+	v1.POST("/books", handler.PostBooksHandler)
 
 	router.Run()
 }

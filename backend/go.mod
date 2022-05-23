@@ -1,4 +1,4 @@
-module go-book
+module github.com/tris-tux/go-book/backend
 
 go 1.18
 
