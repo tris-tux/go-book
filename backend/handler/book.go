@@ -2,11 +2,11 @@ package handler
 
 import (
 	"fmt"
-	"github.com/tris-tux/go-book/backend/schema"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
 	"github.com/go-playground/validator"
+	"github.com/tris-tux/go-book/backend/schema"
 )
 
 func RootHandler(c *gin.Context) {
