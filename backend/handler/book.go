@@ -1,8 +1,8 @@
 package handler
 
 import (
-	"../schema"
 	"fmt"
+	"github.com/tris-tux/go-book/backend/schema"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -30,7 +30,7 @@ func QueryHandler(c *gin.Context) {
 }
 
 func PostBooksHandler(c *gin.Context) {
-	var bookInput book.BookInput
+	var bookInput schema.BookInput
 
 	err := c.ShouldBindJSON(&bookInput)
 	if err != nil {

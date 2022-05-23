@@ -1,4 +1,4 @@
-package book
+package schema
 
 import (
 	"encoding/json"
