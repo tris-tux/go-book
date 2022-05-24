@@ -32,13 +32,7 @@ func main() {
 
 	bookRepo := aa.NewRepo(db)
 	bookPostgres := aa.NewPostgres(bookRepo)
-
-	bookInput := schema.BookInput{
-		Title: "dwi",
-		Price: "20000",
-	}
-
-	bookPostgres.Create(bookInput)
+	bookHandler := handler.NewBookHandler(bookPostgres)
 
 	// books, err := bookRepo.FindAll()
 	// if err != nil {
@@ -116,10 +110,10 @@ func main() {
 
 	v1 := router.Group("/v1")
 
-	v1.GET("/", handler.RootHandler)
-	v1.GET("/books/:id/:title", handler.GetBooksHandler)
-	v1.GET("/query", handler.QueryHandler)
-	v1.POST("/books", handler.PostBooksHandler)
+	v1.GET("/", bookHandler.RootHandler)
+	v1.GET("/books/:id/:title", bookHandler.GetBooksHandler)
+	v1.GET("/query", bookHandler.QueryHandler)
+	v1.POST("/books", bookHandler.PostBooksHandler)
 
 	router.Run()
 }

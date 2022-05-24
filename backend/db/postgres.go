@@ -30,10 +30,15 @@ func (p *postgres) FindByID(ID int) (schema.Book, error) {
 
 func (p *postgres) Create(bookInput schema.BookInput) (schema.Book, error) {
 	price, _ := bookInput.Price.Int64()
+	rating, _ := bookInput.Rating.Int64()
+	discount, _ := bookInput.Discount.Int64()
 
 	book := schema.Book{
-		Title: bookInput.Title,
-		Price: int(price),
+		Title:       bookInput.Title,
+		Price:       int(price),
+		Description: bookInput.Description,
+		Rating:      int(rating),
+		Discount:    int(discount),
 	}
 
 	newBook, err := p.repo.Create(book)

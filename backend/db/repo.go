@@ -8,7 +8,7 @@ import (
 type Repo interface {
 	FindAll() ([]schema.Book, error)
 	FindByID(ID int) (schema.Book, error)
-	Create(Book schema.Book) (schema.Book, error)
+	Create(book schema.Book) (schema.Book, error)
 }
 
 type repo struct {
@@ -36,7 +36,7 @@ func (r *repo) FindByID(ID int) (schema.Book, error) {
 }
 
 func (r *repo) Create(book schema.Book) (schema.Book, error) {
-	err := r.db.Find(&book).Error
+	err := r.db.Create(&book).Error
 
 	return book, err
 }
