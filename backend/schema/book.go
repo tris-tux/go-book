@@ -6,14 +6,14 @@ import (
 )
 
 type Book struct {
-	ID          int
-	Title       string
-	Description string
-	Price       int
-	Rating      int
-	Discount    int
-	CreatedAt   time.Time
-	UpdatedAt   time.Time
+	ID          int       `json:"id"`
+	Title       string    `json:"title"`
+	Description string    `json:"description"`
+	Price       int       `json:"price"`
+	Rating      int       `json:"rating"`
+	Discount    int       `json:"discount"`
+	CreatedAt   time.Time `json:"created_at"`
+	UpdatedAt   time.Time `json:"update_at"`
 }
 
 type BookInput struct {
