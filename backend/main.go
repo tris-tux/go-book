@@ -24,30 +24,85 @@ func main() {
 	// }
 
 	dbURL := "postgres://postgres:secret@book-postgres:5432/book"
-
 	db, err := gorm.Open(postgres.Open(dbURL), &gorm.Config{})
-
 	if err != nil {
 		log.Fatalln(err)
 	}
-
 	db.AutoMigrate(&schema.Book{})
 
-	book := schema.Book{}
-	book.Title = "Tris"
-	book.Price = 100000
-	book.Discount = 20
-	book.Rating = 5
-	book.Description = "Journal Tris"
+	bookRepo := db.NewRepo(db)
 
-	err = db.Create(&book).Error
+	books, err := bookRepo.FindAll()
 	if err != nil {
 		fmt.Println("==========================")
-		fmt.Println("Error Creating Book Record")
+		fmt.Println("Error Find All Book Record")
 		fmt.Println("==========================")
 	}
 
+	for _, book := range books {
+		fmt.Println("Title :", book.Title)
+	}
+
+	// book := schema.Book{}
+
+	// // ================================== create ======================================
+	// book.Title = "Tris"
+	// book.Price = 100000
+	// book.Discount = 20
+	// book.Rating = 5
+	// book.Description = "Journal Tris"
+
+	// err = db.Create(&book).Error
+	// if err != nil {
+	// 	fmt.Println("==========================")
+	// 	fmt.Println("Error Creating Book Record")
+	// 	fmt.Println("==========================")
+	// }
+
 	// fmt.Println("Database Connected")
+
+	// // ================================== get first ======================================
+	// // var book schema.Book
+	// err = db.First(&book).Error
+	// if err != nil {
+	// 	fmt.Println("==========================")
+	// 	fmt.Println("Error Finding Book Record")
+	// 	fmt.Println("==========================")
+	// }
+
+	// fmt.Println("Title :", book.Title)
+	// fmt.Println("Book object %v", book)
+
+	// // =================================== update ========================================
+	// err = db.Debug().Where("id = ?", 1).First(&book).Error
+	// if err != nil {
+	// 	fmt.Println("==========================")
+	// 	fmt.Println("Error finding Book Record")
+	// 	fmt.Println("==========================")
+	// }
+
+	// book.Title = "Anto"
+
+	// err = db.Save(&book).Error
+	// if err != nil {
+	// 	fmt.Println("==========================")
+	// 	fmt.Println("Error Editing Book Record 1")
+	// 	fmt.Println("==========================")
+	// }
+
+	// // =================================== delete ========================================
+	// err = db.Debug().Where("id = ?", 1).First(&book).Error
+	// if err != nil {
+	// 	fmt.Println("==========================")
+	// 	fmt.Println("Error finding book Record")
+	// 	fmt.Println("==========================")
+	// }
+	// err = db.Delete(&book).Error
+	// if err != nil {
+	// 	fmt.Println("==========================")
+	// 	fmt.Println("Error deleting Book Record")
+	// 	fmt.Println("==========================")
+	// }
 
 	router := gin.Default()
 
