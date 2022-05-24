@@ -1,4 +1,4 @@
-package db
+package aa
 
 import (
 	"github.com/tris-tux/go-book/backend/schema"

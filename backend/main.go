@@ -1,10 +1,10 @@
 package main
 
 import (
-	"fmt"
 	"log"
 
 	"github.com/gin-gonic/gin"
+	aa "github.com/tris-tux/go-book/backend/db"
 	"github.com/tris-tux/go-book/backend/handler"
 	"github.com/tris-tux/go-book/backend/schema"
 	"gorm.io/driver/postgres"
@@ -30,18 +30,26 @@ func main() {
 	}
 	db.AutoMigrate(&schema.Book{})
 
-	bookRepo := db.NewRepo(db)
+	bookRepo := aa.NewRepo(db)
+	bookPostgres := aa.NewPostgres(bookRepo)
 
-	books, err := bookRepo.FindAll()
-	if err != nil {
-		fmt.Println("==========================")
-		fmt.Println("Error Find All Book Record")
-		fmt.Println("==========================")
+	bookInput := schema.BookInput{
+		Title: "dwi",
+		Price: "20000",
 	}
 
-	for _, book := range books {
-		fmt.Println("Title :", book.Title)
-	}
+	bookPostgres.Create(bookInput)
+
+	// books, err := bookRepo.FindAll()
+	// if err != nil {
+	// 	fmt.Println("==========================")
+	// 	fmt.Println("Error Find All Book Record")
+	// 	fmt.Println("==========================")
+	// }
+
+	// for _, book := range books {
+	// 	fmt.Println("Title :", book.Title)
+	// }
 
 	// book := schema.Book{}
 
